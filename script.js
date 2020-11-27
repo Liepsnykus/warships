@@ -18,19 +18,36 @@ let shipModels = [
 ]
 
 const gameContainer = document.getElementById ('gameContainer')
-
+const playerSide = document.getElementById ('playerSide')
+const shipsLeft = document.getElementById ('shipsLeft')
 let shipsArr = []
 let createdShip = []
 let usedParts = []
+let damagedShip = []
+let shipsTotal = 10
 
 
+function checkLastShot(item) {
+    shipsArr.map (x => {
+        if(x.includes(item)) {
+           shipsArr[shipsArr.indexOf(x)] = x.filter( el => el != item)
+           console.log(shipsArr);
+           shipsArr=shipsArr.filter(el => el.length != 0)
+        }
+       
+        shipsLeft.innerText = `Ships Left: ${shipsArr.length}`
+
+        
+    })
+}
 
 function shoot(event) {
-
+console.log(shipsArr);
     if(event.target.classList.length > 1) {
         console.log("baaaam");
         event.target.removeEventListener('click', shoot)
         event.target.classList.add('damaged')
+        checkLastShot(event.target.id)
     } else {
         event.target.removeEventListener('click', shoot)
         event.target.classList.add('wrong')
@@ -155,9 +172,25 @@ function generateFleet() {
 
 }
 
- 
-
-
-
-
 generateFleet()
+
+function makeShip() {
+    
+}
+
+function createPlayerField() {
+    for (let x = 0; x < 100; x++) {
+        let place = document.createElement('div')
+        place.classList.add('place')
+        let idNr = `${x}`
+        idNr.length < 2 ? idNr = `0${x}` : null
+        place.setAttribute('id', `p${idNr}`)
+       
+        playerSide.appendChild(place)
+        place.addEventListener('click', makeShip)
+
+        
+    }
+}
+
+createPlayerField() 

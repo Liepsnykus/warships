@@ -2,6 +2,12 @@
 .d-flex {
     display: flex;
 }
+.d-grid {
+    display: grid;
+}
+.d-none {
+    display: none;
+}
 
 .j-center {
     justify-content: center;
@@ -11,11 +17,11 @@
     align-items: center;
 }
 .gameContainer {
-    display: grid;
     grid-template-columns: repeat(10, 30px [col-start]);
     grid-template-rows: repeat(10, 30px [row-start]);
     box-sizing: border-box;
     gap: 1px;
+    margin: 10px;
 }
 
 .place {
